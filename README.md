@@ -1,1 +1,1 @@
-# NTU_GSB_DynSysBio
+# practice and final project of course Dynamic Biological System
