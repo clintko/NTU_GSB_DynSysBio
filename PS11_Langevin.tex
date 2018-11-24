@@ -1,0 +1,512 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{???\_PS11\_Langevin}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    \section{Brownian Motion (Standard Wiener
+Process)}\label{brownian-motion-standard-wiener-process}
+
+    The formal definition of Brownian Motion is \[dx = 0*dt + dW \]
+
+where W(t) is a standard Wiener process, such that
+
+\[ W(t) - W(s) = \sqrt{t-s} * N(0, 1)\]
+
+where N(0, 1) denotes a normally distributed random variable with zero
+men and unit variance.
+
+By applying Euler-Maruyama method, the Brownian Motion could be viewed
+as an iterated sum of independent identical normal random variables.
+
+    First, I simulated several Brownian Motion with specified number of time
+points. Then, the simulated processes are ploted with different colors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c}{\PYZsh{} set parameters}
+        \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{1}                     \PY{c}{\PYZsh{}\PYZsh{} the total time simulated}
+        \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{500}                   \PY{c}{\PYZsh{}\PYZsh{} the number of time points within time = 0 \PYZti{} T}
+        \PY{n}{dt} \PY{o}{=} \PY{n}{T}\PY{o}{/}\PY{n}{N}                  \PY{c}{\PYZsh{}\PYZsh{} the length of dt}
+        \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{N}\PY{p}{)}  \PY{c}{\PYZsh{}\PYZsh{} time points}
+        \PY{n}{sampleNum} \PY{o}{=} \PY{l+m+mi}{5}            \PY{c}{\PYZsh{}\PYZsh{} number of brownian process simulated}
+        
+        \PY{c}{\PYZsh{} create iid standard normal random variables multiplied by squared root of dt}
+        \PY{n}{dW} \PY{o}{=} \PY{n}{dt}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{N}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{,} \PY{n}{sampleNum}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} simulate brownian process}
+        \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[} \PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{process}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{idx}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{process} \PY{o+ow}{in} \PY{n}{dW} \PY{p}{]}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} Plot the Brownian Process}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{W}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Brownian Process}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} <matplotlib.text.Text at 0x727dba8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{柯逵悅_PS11_Langevin_files/柯逵悅_PS11_Langevin_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Function of the process}\label{function-of-the-process}
+
+    In the document writen by Prof.~Higham, he evaluated the function of a
+stochastic process, which has the form as
+follows:\\\[ u(W(t)) = exp(t + \frac{1}{2} * W(t)) \] where W(t) is a
+standard Wiener process. The solution (solid thick line) could be
+obtained by calculate the means of several simulated process (thin
+dashed line)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZsh{} calculate the function of each simulated process}
+        \PY{n}{uW} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{e}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{t} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{W}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} mean of brownian Process}
+        \PY{n}{umean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{uW}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} plot the process and mean}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{uW}\PY{o}{.}\PY{n}{T}\PY{p}{,}    \PY{n}{linestyle} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{umean}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{linestyle} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (0, 5)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{柯逵悅_PS11_Langevin_files/柯逵悅_PS11_Langevin_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Stochastic Version of a Linear
+ODE}\label{stochastic-version-of-a-linear-ode}
+
+    The Euler-Maryama method is a quick, powerful ideas on simulated a ODE
+with noise.\\The example ODE here has the form:
+\[ dx = f(x)dt + g(x)dW \]
+
+\[ f(x) = λx \]
+
+\[ g(x) = µx \] The λ and µ are both constants.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c}{\PYZsh{} define functions and function that simulated stochastic version of ODE}
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{lambdaNum}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{lambdaNum} \PY{o}{*} \PY{n}{x}
+        
+        \PY{k}{def} \PY{n+nf}{g}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mu}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{mu} \PY{o}{*} \PY{n}{x}
+        
+        \PY{k}{def} \PY{n+nf}{process}\PY{p}{(}\PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{sampleNum} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{lambdaNum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{mu} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{c}{\PYZsh{} initialization}
+            \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{N} \PY{o}{=} \PY{n}{iterations}
+            
+            \PY{c}{\PYZsh{} solve ODE}
+            \PY{k}{for} \PY{n}{dummyNum} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{sampleNum}\PY{p}{)}\PY{p}{:}
+                \PY{c}{\PYZsh{} initial value of each simulation}
+                \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}0}\PY{p}{]}
+                
+                \PY{c}{\PYZsh{} each simulation of stochastic ODE}
+                \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dw} \PY{o}{=} \PY{n}{dt}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n+nb}{float}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{standard\PYZus{}normal}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{+} \PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{lambdaNum}\PY{p}{)} \PY{o}{*} \PY{n}{dt} \PY{o}{+} \PY{n}{g}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{mu}\PY{p}{)} \PY{o}{*} \PY{n}{dw}\PY{p}{)}
+                
+                \PY{c}{\PYZsh{} add each simulation to a list}
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c}{\PYZsh{} set parameters}
+         \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{0.01}        \PY{c}{\PYZsh{}\PYZsh{} initial value of x}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{500}           \PY{c}{\PYZsh{}\PYZsh{} number of simulated process}
+         \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100}
+         
+         \PY{c}{\PYZsh{} simulate the solution}
+         \PY{c}{\PYZsh{}\PYZsh{} no noise (set mu = 0)}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{result01} \PY{o}{=} \PY{n}{process}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{N}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{,} \PY{n}{lambdaNum}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{mu}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}\PYZsh{} only noise (set lambda = 0)}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{result02} \PY{o}{=} \PY{n}{process}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{N}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{,} \PY{n}{lambdaNum}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{mu}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}\PYZsh{} only noise (set lambda = 0)}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{result03} \PY{o}{=} \PY{n}{process}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{N}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{,} \PY{n}{lambdaNum}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{mu}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}\PYZsh{} Lambda != 0 and mu != 0}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{result04} \PY{o}{=} \PY{n}{process}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{N}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{,} \PY{n}{lambdaNum}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{mu}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{} plot the result}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.7}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result01}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lambda = 1, mu = 0 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ =\PYZgt{} Exponential Growth}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result02}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lambda = 0, mu = 1 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Process = 100 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Time Point = 10}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result03}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lambda = 0, mu = 1 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Process = 100 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Time Point = 100}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result04}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lambda = 10, mu = 10 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Process = 100 }\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{ Number of Time Point = 10}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <matplotlib.text.Text at 0xfc47a58>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{柯逵悅_PS11_Langevin_files/柯逵悅_PS11_Langevin_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the second picture, where mu = 1 and lambda = 0, the noise in next
+data point is proportion to the value of the last step. Therefore, the
+process spread seems to spread in the short iterations. However, when
+the time point increase, the mean of the process is zero, since the
+kernel of the noise is a normal random variable with mean equals to
+zero. Interestingly, there are some simulated processes rise and
+decrease dramatically, but eventually converge back to zero.
+
+    \section{Stochastic Version of a Gene Expression
+ODE}\label{stochastic-version-of-a-gene-expression-ode}
+
+    The ODE of the gene expression is \[ \frac{dx}{dt} = \beta - \alpha*x \]
+
+By adding the noise, the Langevin equation of the gene expression
+becomes
+\[ dx = (\beta - \alpha*x) * dt + \sqrt{\beta*dt} * N(0, 1) + \sqrt{\alpha*x*dt} * N(0, 1)\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{geneExp1}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{sampleNum} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{:}
+            \PY{c}{\PYZsh{} initialization}
+            \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{N} \PY{o}{=} \PY{n}{iterations}
+            
+            \PY{k}{for} \PY{n}{dummyNum} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{sampleNum}\PY{p}{)}\PY{p}{:}
+                \PY{c}{\PYZsh{} initial value of each simulation}
+                \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}0}\PY{p}{]}
+                
+                \PY{c}{\PYZsh{} simulation}
+                \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dx} \PY{o}{=} \PY{p}{(}\PY{n}{beta} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{dt}
+                    \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{+} \PY{n}{dx} \PY{p}{)}
+                    
+                \PY{c}{\PYZsh{} add each simulation to a list}
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{)}    
+                
+        \PY{k}{def} \PY{n+nf}{geneExp2}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{sampleNum} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{:}
+            \PY{c}{\PYZsh{} initialization}
+            \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{N} \PY{o}{=} \PY{n}{iterations}
+            
+            \PY{k}{for} \PY{n}{dummyNum} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{sampleNum}\PY{p}{)}\PY{p}{:}
+                \PY{c}{\PYZsh{} initial value of each simulation}
+                \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}0}\PY{p}{]}
+                
+                \PY{c}{\PYZsh{} simulation}
+                \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dx} \PY{o}{=} \PY{p}{(}\PY{n}{beta} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{dt} 
+                    \PY{n}{dx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{beta} \PY{o}{*} \PY{n}{dt}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n+nb}{float}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{standard\PYZus{}normal}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{dx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{alpha} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{*} \PY{n}{dt}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n+nb}{float}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{standard\PYZus{}normal}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{x}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{+} \PY{n}{dx} \PY{p}{)}
+                    
+                \PY{c}{\PYZsh{} add each simulation to a list}
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+    By setting the initial value smaller than the ratio BETA/ALPHA, we could
+observe how the gene expression level rise to the steady state. On the
+other hand, when the inital value is set larger than the ratio
+BETA/ALPHA, we could observe how the protein level decay to the steady
+state.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} set parameters}
+        \PY{n}{BETA} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{ALPHA} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{500}
+        \PY{n}{sampleNum} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        \PY{c}{\PYZsh{} simulation gene expression}
+        \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{resGeneExp01} \PY{o}{=} \PY{n}{geneExp1}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{BETA}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{ALPHA}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{)}
+        \PY{n}{resGeneExp02} \PY{o}{=} \PY{n}{geneExp2}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{BETA}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{ALPHA}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{sampleNum}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{)}
+        
+        \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{resGeneExp11} \PY{o}{=} \PY{n}{geneExp1}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{BETA}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{ALPHA}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{)}
+        \PY{n}{resGeneExp12} \PY{o}{=} \PY{n}{geneExp2}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{o}{=}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{BETA}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{ALPHA}\PY{p}{,} \PY{n}{iterations}\PY{o}{=}\PY{n}{iterations}\PY{p}{,} \PY{n}{sampleNum}\PY{o}{=}\PY{n}{sampleNum}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{n}{dt}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} plot the simulation}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{resGeneExp01}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{resGeneExp02}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BETA/ALPHA = 20, Initial Value = 2}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{resGeneExp11}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{resGeneExp12}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BETA/ALPHA = 20, Initial Value = 100}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.text.Text at 0x726a198>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{柯逵悅_PS11_Langevin_files/柯逵悅_PS11_Langevin_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that in the plot above, the blue line represents the deterministic
+ODE of gene expression, and the green line is the stochastic version of
+the gene expression.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
